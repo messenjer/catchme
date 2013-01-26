@@ -17,6 +17,14 @@ define(["zepto", "underscore", "application/views/screen"], function($, _, Scree
       return gameCreateScreenView.__super__.show.call(this);
     };
 
+    gameCreateScreenView.prototype.bindActions = function(actions) {
+      if ((actions != null ? actions.gamestart : void 0) != null) {
+        return $("" + this.divID + " .startGameButton").on('click', function() {
+          return actions.gamestart();
+        });
+      }
+    };
+
     return gameCreateScreenView;
 
   })(ScreenView);

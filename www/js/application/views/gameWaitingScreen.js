@@ -3,29 +3,29 @@ var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 define(["zepto", "underscore", "application/views/screen"], function($, _, ScreenView) {
-  var gameJoinScreenView;
-  return gameJoinScreenView = (function(_super) {
+  var gameWaitingScreenView;
+  return gameWaitingScreenView = (function(_super) {
 
-    __extends(gameJoinScreenView, _super);
+    __extends(gameWaitingScreenView, _super);
 
-    function gameJoinScreenView(divID) {
+    function gameWaitingScreenView(divID) {
       this.divID = divID;
-      gameJoinScreenView.__super__.constructor.call(this, this.divID);
+      gameWaitingScreenView.__super__.constructor.call(this, this.divID);
     }
 
-    gameJoinScreenView.prototype.show = function() {
-      return gameJoinScreenView.__super__.show.call(this);
+    gameWaitingScreenView.prototype.show = function() {
+      return gameWaitingScreenView.__super__.show.call(this);
     };
 
-    gameJoinScreenView.prototype.bindActions = function(actions) {
+    gameWaitingScreenView.prototype.bindActions = function(actions) {
       if ((actions != null ? actions.gamestart : void 0) != null) {
-        return $("" + this.divID + " .startGameButton").on('click', function() {
+        return $("" + this.divID + " .go").on('click', function() {
           return actions.gamestart();
         });
       }
     };
 
-    return gameJoinScreenView;
+    return gameWaitingScreenView;
 
   })(ScreenView);
 });

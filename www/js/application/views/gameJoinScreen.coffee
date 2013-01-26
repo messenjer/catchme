@@ -6,3 +6,8 @@ define ["zepto","underscore","application/views/screen"], ($,_,ScreenView) ->
 
     show:()->
       super()
+
+    bindActions:(actions)->
+      if actions?.gamestart?
+        $("#{@divID} .startGameButton").on 'click',() ->
+           actions.gamestart()

@@ -1,12 +1,13 @@
 define ["zepto","application/controllers/controller"], ($,Controller) ->
 
-  class gameCreateController extends Controller
+  class gameWaitingController extends Controller
 
     constructor:(@view,@settings)->
       super @view
       availaibleActions=
         gamestart: @startGame
       @view.bindActions availaibleActions
+      
 
     activate:() ->
       super()
@@ -14,4 +15,4 @@ define ["zepto","application/controllers/controller"], ($,Controller) ->
     unload:() ->
 
     startGame:() =>
-      $('body').trigger('AppEvent',['GAMEWAITING'])
+      $('body').trigger('AppEvent',['GAMEPLAYING'])

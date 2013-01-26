@@ -8,12 +8,16 @@ define [
   "application/views/gameCreateScreen",
   "application/controllers/gameJoin",
   "application/views/gameJoinScreen",
+  "application/controllers/gameWaiting",
+  "application/views/gameWaitingScreen",  
   "application/controllers/gamePlaying",
   "application/views/gamePlayingScreen",  
+  "application/controllers/gameFinish",
+  "application/views/gameFinishScreen",  
   "application/models/input",
   "application/models/api",
   "application/models/settings",
-  "application/models/statemachine"], ($,loadingController,loadingView,gameSetupController,gameSetupView,gameCreateController,gameCreateView,gameJoinController,gameJoinView,gamePlayingController,gamePlayingView,Input,Api,Settings,StateMachine) ->
+  "application/models/statemachine"], ($,loadingController,loadingView,gameSetupController,gameSetupView,gameCreateController,gameCreateView,gameJoinController,gameJoinView,gameWaitingController,gameWaitingView,gamePlayingController,gamePlayingView,gameFinishController,gameFinishView,Input,Api,Settings,StateMachine) ->
 
   class Application
     @settings: null
@@ -35,9 +39,15 @@ define [
 
       @gameJoinController = new gameJoinController(new gameJoinView("#gameJoin"),@settings)
       @statemachine.add(@gameJoinController)
+
+      @gameWaitingController = new gameWaitingController(new gameWaitingView("#gameWaiting"),@settings)
+      @statemachine.add(@gameWaitingController)      
       
       @gamePlayingController = new gamePlayingController(new gamePlayingView("#gamePlaying"),@settings)
       @statemachine.add(@gamePlayingController)      
+
+      @gameFinishController = new gameFinishController(new gameFinishView("#gameFinish"),@settings)
+      @statemachine.add(@gameFinishController)      
 
       console.log("Application initialized...")
       
@@ -64,13 +74,19 @@ define [
           history.pushState({page: 'GAMESETUP'}, "Game Setup", "#gamesetup")
         when 'GAMECREATE'
           @statemachine.trigger("change",@gameCreateController)
-          history.pushState({page: 'GAMECREATE'}, "Game Create", "#gamesetup")
+          history.pushState({page: 'GAMECREATE'}, "Game Create", "#gamecreate")
         when 'GAMEJOIN'
           @statemachine.trigger("change",@gameJoinController)
-          history.pushState({page: 'GAMEJOIN'}, "Game Join", "#gamesetup")
-        when 'GAMEPLAYNG'
+          history.pushState({page: 'GAMEJOIN'}, "Game Join", "#gamejoin")
+        when 'GAMEWAITING'
+          @statemachine.trigger("change",@gameWaitingController)
+          history.pushState({page: 'GAMEWAITING'}, "Game Playing", "#gameplaying")
+        when 'GAMEPLAYING'
           @statemachine.trigger("change",@gamePlayingController)
-          history.pushState({page: 'GAMEPLAYING'}, "Game Playing", "#gamesetup")
+          history.pushState({page: 'GAMEPLAYING'}, "Game Playing", "#gameplaying")
+        when 'GAMEFINISH'
+          @statemachine.trigger("change",@gameFinishController)
+          history.pushState({page: 'GAMEFINISH'}, "Game Playing", "#gameplaying")
         
     goBack: (e) ->
       if e?.state?.page?
@@ -81,6 +97,10 @@ define [
             @statemachine.trigger("change",@gameCreateController)
           when 'GAMEJOIN'
             @statemachine.trigger("change",@gameJoinController)
-          when 'GAMEPLAYNG'
+          when 'GAMEWAITING'
+            @statemachine.trigger("change",@gameWaitingController)              
+          when 'GAMEPLAYING'
             @statemachine.trigger("change",@gamePlayingController)              
+          when 'GAMEFINISH'
+            @statemachine.trigger("change",@gameFinishController)              
           
