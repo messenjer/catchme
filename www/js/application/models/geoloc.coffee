@@ -31,9 +31,7 @@ define ["zepto"],($) ->
                 alert("Unknown error happened, oops")
 
     updatePosition:(pos) ->
-        @position =
-            lat : pos.coords.latitude
-            lon : pos.coords.longitude
+        @position = [ pos.coords.latitude, pos.coords.longitude ]
         console.log @position
         if @setinterval 
             @infiniteLoop = setInterval(@getCurrentPosition,60000)
