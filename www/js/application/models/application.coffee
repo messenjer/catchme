@@ -17,7 +17,8 @@ define [
   "application/models/input",
   "application/models/api",
   "application/models/settings",
-  "application/models/statemachine"], ($,loadingController,loadingView,gameSetupController,gameSetupView,gameCreateController,gameCreateView,gameJoinController,gameJoinView,gameWaitingController,gameWaitingView,gamePlayingController,gamePlayingView,gameFinishController,gameFinishView,Input,Api,Settings,StateMachine) ->
+  "application/models/geoloc",
+  "application/models/statemachine"], ($,loadingController,loadingView,gameSetupController,gameSetupView,gameCreateController,gameCreateView,gameJoinController,gameJoinView,gameWaitingController,gameWaitingView,gamePlayingController,gamePlayingView,gameFinishController,gameFinishView,Input,Api,Settings,Geolocation,StateMachine) ->
 
   class Application
     @settings: null
@@ -48,9 +49,8 @@ define [
 
       @gameFinishController = new gameFinishController(new gameFinishView("#gameFinish"),@settings)
       @statemachine.add(@gameFinishController)      
-      
+
       console.log("Application initialized...")
-      
       
       $('body').bind 'keydown', (e) =>
         @dispatch(Input.keyEventToEvent(e))
@@ -64,6 +64,10 @@ define [
         @goBack(event)
 
       @loadingController.activate()
+
+      @geoloc = new Geolocation()
+      @geoloc.updatePositionStart()
+
       @api.setConnectionCallback(@loadingController.connectionOk)
       @api.init()
 
