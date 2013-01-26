@@ -33,7 +33,7 @@ define ["socket.io"],(io) ->
     whoAmi:() ->
       @socket.emit('whoami')
 
-    onId:(@id) ->
+    onId:(@id) =>
 
     onError:(error) =>
       console.log error
@@ -48,12 +48,14 @@ define ["socket.io"],(io) ->
       console.log "debug message received:"
       console.log message
 
-    onGameon:(@gameData) ->
+    onGameon:(@gameData) =>
       console.log "gameon received"
       console.log @gameData
       @callbackGameOn?()
 
     getOthersPosition:() ->
       for key,value of @gameData
-        if key is not @id
+        if key is @id
+          console.log "same id"
+        else
           return value.position

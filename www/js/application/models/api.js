@@ -6,11 +6,15 @@ define(["socket.io"], function(io) {
   return CatchMeServerApi = (function() {
 
     function CatchMeServerApi() {
+      this.onGameon = __bind(this.onGameon, this);
+
       this.onDebug = __bind(this.onDebug, this);
 
       this.onConnect = __bind(this.onConnect, this);
 
       this.onError = __bind(this.onError, this);
+
+      this.onId = __bind(this.onId, this);
       this.url = "http://10.102.180.34:8080/";
       this.gameData = {};
       this.socket = null;
@@ -87,7 +91,9 @@ define(["socket.io"], function(io) {
       _ref = this.gameData;
       for (key in _ref) {
         value = _ref[key];
-        if (key === !this.id) {
+        if (key === this.id) {
+          console.log("same id");
+        } else {
           return value.position;
         }
       }

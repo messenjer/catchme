@@ -15,5 +15,7 @@ define ["zepto","application/controllers/controller","application/models/map"], 
       super()
       @map.init()
       @map.setMyPosition(@geoloc.getPosition())
+      console.log "positions"
+      console.log @api.getOthersPosition()
       @map.setOthersPosition(@api.getOthersPosition())
       console.log "init map"
