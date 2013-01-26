@@ -8,10 +8,9 @@ define ["zepto","underscore","application/views/screen"], ($,_,ScreenView) ->
       super()
 
     bindActions:(actions)->
-      if(actions)
-        if(actions.gamecreate)
-          console.log "gamecreate bound"
-          $("#{@divID} .createGameButton").on('click',() => actions.gamecreate)
-        if(actions.gamejoin)
-          console.log "gamejoin bound"
-          $("#{@divID} .joinGameButton").on('click',() => actions.gamejoin)
+      if actions?.gamecreate?
+        $("#{@divID} .createGameButton").on 'click',() ->
+           actions.gamecreate()
+      if actions?.gamejoin?
+        $("#{@divID} .joinGameButton").on 'click',() ->
+          actions.gamejoin()

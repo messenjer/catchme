@@ -26,16 +26,24 @@
       <button class="joinGameButton">Join Game</button>
     </div>
     <div id="gameCreate" class="screen">
-      <label for="name">Name</label>
-      <input type="text" name="name"/>
-      <label for="type">Game type</label>
-      <select name="gametype">
-        <option value="type01">Catch small (1 min)</option>
-        <option value="type15">Catch small (15 min)</option>
-        <option value="type30">Catch small (30 min)</option>
-      </select>
+      <form>
+        <label for="name">Name</label>
+        <input type="text" name="name" />
+        <label for="type">Game type</label>
+        <select name="gametype">
+          <option value="type01">Catch small (1 min)</option>
+          <option value="type15">Catch small (15 min)</option>
+          <option value="type30">Catch small (30 min)</option>
+        </select>
+        <button class="startGame">Start</button>
+      </form>
     </div>
     <div id="gameJoin" class="screen">
+      <form>
+        <label for="name">Name</label>
+        <input type="text" name="name" />
+        <button class="startGame">Start</button>
+      </form>
     </div>
     <div id="gameWaiting" class="screen">
     </div>
