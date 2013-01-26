@@ -1,8 +1,12 @@
 define ["zepto","application/controllers/controller"], ($,Controller) ->
 
-  class screen1Controller extends Controller
+  class gameJoinController extends Controller
+
     constructor:(@view,@settings)->
       super @view
 
     activate:() ->
       super()
+
+    unload:() ->
+

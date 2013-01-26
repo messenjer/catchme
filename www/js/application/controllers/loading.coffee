@@ -15,4 +15,4 @@ define ["zepto","application/controllers/controller","application/models/api"], 
       setTimeout(@event,1000)
 
     event:() ->
-      $('body').trigger('AppEvent',['SCREEN1'])
+      $('body').trigger('AppEvent',['GAMESETUP'])

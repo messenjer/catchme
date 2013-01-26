@@ -3,21 +3,21 @@ var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 define(["zepto", "underscore", "application/views/screen"], function($, _, ScreenView) {
-  var screen2ScreenView;
-  return screen2ScreenView = (function(_super) {
+  var gameCreateScreenView;
+  return gameCreateScreenView = (function(_super) {
 
-    __extends(screen2ScreenView, _super);
+    __extends(gameCreateScreenView, _super);
 
-    function screen2ScreenView(divID) {
+    function gameCreateScreenView(divID) {
       this.divID = divID;
-      screen2ScreenView.__super__.constructor.call(this, this.divID);
+      gameCreateScreenView.__super__.constructor.call(this, this.divID);
     }
 
-    screen2ScreenView.prototype.show = function() {
-      return screen2ScreenView.__super__.show.call(this);
+    gameCreateScreenView.prototype.show = function() {
+      return gameCreateScreenView.__super__.show.call(this);
     };
 
-    return screen2ScreenView;
+    return gameCreateScreenView;
 
   })(ScreenView);
 });

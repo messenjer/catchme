@@ -24,7 +24,7 @@ define(["zepto", "application/controllers/controller", "application/models/api"]
     };
 
     loadingController.prototype.event = function() {
-      return $('body').trigger('AppEvent', ['SCREEN1']);
+      return $('body').trigger('AppEvent', ['GAMESETUP']);
     };
 
     return loadingController;

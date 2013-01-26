@@ -3,22 +3,24 @@ var __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 define(["zepto", "application/controllers/controller"], function($, Controller) {
-  var screen1Controller;
-  return screen1Controller = (function(_super) {
+  var gameJoinController;
+  return gameJoinController = (function(_super) {
 
-    __extends(screen1Controller, _super);
+    __extends(gameJoinController, _super);
 
-    function screen1Controller(view, settings) {
+    function gameJoinController(view, settings) {
       this.view = view;
       this.settings = settings;
-      screen1Controller.__super__.constructor.call(this, this.view);
+      gameJoinController.__super__.constructor.call(this, this.view);
     }
 
-    screen1Controller.prototype.activate = function() {
-      return screen1Controller.__super__.activate.call(this);
+    gameJoinController.prototype.activate = function() {
+      return gameJoinController.__super__.activate.call(this);
     };
 
-    return screen1Controller;
+    gameJoinController.prototype.unload = function() {};
+
+    return gameJoinController;
 
   })(Controller);
 });

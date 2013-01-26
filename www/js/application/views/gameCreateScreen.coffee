@@ -1,6 +1,6 @@
 define ["zepto","underscore","application/views/screen"], ($,_,ScreenView) ->
 
-  class screen2ScreenView extends ScreenView
+  class gameCreateScreenView extends ScreenView
     constructor:(@divID)->
       super @divID
 
