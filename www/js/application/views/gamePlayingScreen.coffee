@@ -1,4 +1,4 @@
-define ["zepto","underscore","leaflet/leaflet","application/views/screen"], ($,_,L,ScreenView) ->
+define ["zepto","underscore","application/views/screen"], ($,_,ScreenView) ->
 
   class gamePlayingScreenView extends ScreenView
     constructor:(@divID)->

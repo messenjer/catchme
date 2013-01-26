@@ -6,6 +6,7 @@
 @import "install-button.css";
 @import "global.css";
 @import "loading.css";
+@import "leaflet.css";
 
 /* Your styles here */
 
@@ -19,7 +20,6 @@ canvas {
     margin: 0 auto;
 }
 
-#map {
-	height: 200px;
-	border: 1px solid #fff;
+html, body, .screen, #map {
+    height: 100%;
 }
