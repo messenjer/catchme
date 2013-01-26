@@ -4,6 +4,8 @@
 
 /* Styles for the installation button */
 @import "install-button.css";
+@import "global.css";
+@import "loading.css";
 
 /* Your styles here */
 
@@ -16,3 +18,4 @@ canvas {
     display: block;
     margin: 0 auto;
 }
+
