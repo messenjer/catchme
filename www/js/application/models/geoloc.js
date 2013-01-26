@@ -46,10 +46,7 @@ define(["zepto"], function($) {
     };
 
     Geolocation.prototype.updatePosition = function(pos) {
-      this.position = {
-        lat: pos.coords.latitude,
-        lon: pos.coords.longitude
-      };
+      this.position = [pos.coords.latitude, pos.coords.longitude];
       console.log(this.position);
       if (this.setinterval) {
         return this.infiniteLoop = setInterval(this.getCurrentPosition, 60000);

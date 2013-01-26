@@ -4,11 +4,14 @@ define(["zepto"], function($) {
   var Map;
   return Map = (function() {
 
-    function Map() {
-      this.map = L.map('map').setView([48.815695, 2.362833], 13);
+    function Map(position) {
+      position = [48.8151459, 2.3631692];
+      this.map = L.map('map');
+      this.map.setView(position, 20);
       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
+      L.marker(position).addTo(this.map).bindPopup("Catch me").openPopup();
     }
 
     return Map;
