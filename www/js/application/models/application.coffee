@@ -8,10 +8,12 @@ define [
   "application/views/gameCreateScreen",
   "application/controllers/gameJoin",
   "application/views/gameJoinScreen",
+  "application/controllers/gamePlaying",
+  "application/views/gamePlayingScreen",  
   "application/models/input",
   "application/models/api",
   "application/models/settings",
-  "application/models/statemachine"], ($,loadingController,loadingView,gameSetupController,gameSetupView,gameCreateController,gameCreateView,gameJoinController,gameJoinView,Input,Api,Settings,StateMachine) ->
+  "application/models/statemachine"], ($,loadingController,loadingView,gameSetupController,gameSetupView,gameCreateController,gameCreateView,gameJoinController,gameJoinView,gamePlayingController,gamePlayingView,Input,Api,Settings,StateMachine) ->
 
   class Application
     @settings: null
@@ -34,6 +36,8 @@ define [
       @gameJoinController = new gameJoinController(new gameJoinView("#gameJoin"),@settings)
       @statemachine.add(@gameJoinController)
       
+      @gamePlayingController = new gamePlayingController(new gamePlayingView("#gamePlaying"),@settings)
+      @statemachine.add(@gamePlayingController)      
 
       console.log("Application initialized...")
       
@@ -56,4 +60,6 @@ define [
           @statemachine.trigger("change",@gameCreateController)
         when 'GAMEJOIN'
           @statemachine.trigger("change",@gameJoinController)
+        when 'GAMEPLAYNG'
+          @statemachine.trigger("change",@gamePlayingController)          
         

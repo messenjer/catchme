@@ -19,3 +19,7 @@ canvas {
     margin: 0 auto;
 }
 
+#map {
+	height: 200px;
+	border: 1px solid #fff;
+}
