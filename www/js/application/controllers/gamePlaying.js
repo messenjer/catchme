@@ -33,6 +33,8 @@ define(["zepto", "application/controllers/controller", "application/models/map"]
       gamePlayingController.__super__.activate.call(this);
       this.map.init();
       this.map.setMyPosition(this.geoloc.getPosition());
+      console.log("positions");
+      console.log(this.api.getOthersPosition());
       this.map.setOthersPosition(this.api.getOthersPosition());
       return console.log("init map");
     };
