@@ -9,8 +9,15 @@ define(["zepto"], function($) {
       this.onError = __bind(this.onError, this);
 
       this.onPosition = __bind(this.onPosition, this);
+
+      this.getCurrentPosition = __bind(this.getCurrentPosition, this);
       this.position = null;
+      this.setinterval = false;
     }
+
+    Geolocation.prototype.getPosition = function() {
+      return this.position;
+    };
 
     Geolocation.prototype.getCurrentPosition = function() {
       if (navigator.geolocation) {
@@ -25,8 +32,7 @@ define(["zepto"], function($) {
     };
 
     Geolocation.prototype.onError = function(error) {
-      var errMsgDOM;
-      errMsgDOM = $(".error");
+      console.log(error);
       switch (error.code) {
         case error.PERMISSION_DENIED:
           return alert("You have canceled location request");
@@ -44,7 +50,20 @@ define(["zepto"], function($) {
         lat: pos.coords.latitude,
         lon: pos.coords.longitude
       };
-      return console.log(this.position);
+      console.log(this.position);
+      if (this.setinterval) {
+        return this.infiniteLoop = setInterval(this.getCurrentPosition, 60000);
+      }
+    };
+
+    Geolocation.prototype.updatePositionStart = function() {
+      this.setinterval = true;
+      return this.getCurrentPosition();
+    };
+
+    Geolocation.prototype.updatePositionStop = function() {
+      this.setinterval = false;
+      return clearInterval(this.infiniteLoop);
     };
 
     return Geolocation;

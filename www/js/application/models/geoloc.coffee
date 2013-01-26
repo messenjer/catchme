@@ -4,8 +4,12 @@ define ["zepto"],($) ->
 
     constructor:() ->
         @position = null
+        @setinterval = false
 
-    getCurrentPosition:() ->
+    getPosition:() ->
+        @position
+
+    getCurrentPosition:() =>
         if navigator.geolocation
             navigator.geolocation.getCurrentPosition @onPosition, @onError
         else
@@ -13,10 +17,9 @@ define ["zepto"],($) ->
 
     onPosition:(pos) =>
         @updatePosition(pos)
-        #watch = setInterval( @updatePosition(pos) , 60000)
 
     onError:(error) =>
-        errMsgDOM = $(".error")
+        console.log error
         switch error.code
             when error.PERMISSION_DENIED
                 alert("You have canceled location request")
@@ -25,10 +28,20 @@ define ["zepto"],($) ->
             when error.TIMEOUT
                 alert("Location request timed out")
             when error.UNKNOWN_ERROR
-                alert("Unknown error happened, oops")        
+                alert("Unknown error happened, oops")
 
     updatePosition:(pos) ->
         @position =
             lat : pos.coords.latitude
             lon : pos.coords.longitude
         console.log @position
+        if @setinterval 
+            @infiniteLoop = setInterval(@getCurrentPosition,60000)
+
+    updatePositionStart:() ->
+        @setinterval = true
+        @getCurrentPosition()
+
+    updatePositionStop:() ->
+        @setinterval = false
+        clearInterval @infiniteLoop

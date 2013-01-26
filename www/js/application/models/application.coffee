@@ -53,7 +53,7 @@ define [
       @statemachine.add(@gameFinishController)      
 
       @geoloc = new Geolocation()
-      @geoloc.getCurrentPosition()
+      @geoloc.updatePositionStart()
 
       console.log("Application initialized...")
       

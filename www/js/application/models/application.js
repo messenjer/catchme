@@ -31,7 +31,7 @@ define(["zepto", "application/controllers/loading", "application/views/loadingSc
       this.gameFinishController = new gameFinishController(new gameFinishView("#gameFinish"), this.settings);
       this.statemachine.add(this.gameFinishController);
       this.geoloc = new Geolocation();
-      this.geoloc.getCurrentPosition();
+      this.geoloc.updatePositionStart();
       console.log("Application initialized...");
       $('body').bind('keydown', function(e) {
         return _this.dispatch(Input.keyEventToEvent(e));
