@@ -11,6 +11,7 @@ define(["zepto", "application/controllers/loading", "application/views/loadingSc
     Application.prototype.init = function() {
       var _this = this;
       this.api = new Api();
+      this.api.init();
       this.settings = new Settings();
       this.statemachine = new StateMachine();
       this.loadingController = new loadingController(new loadingView("#loading"), this.settings);
