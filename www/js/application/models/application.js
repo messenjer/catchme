@@ -29,6 +29,11 @@ define(["zepto", "application/controllers/loading", "application/views/loadingSc
       $('body').bind('AppEvent', function(e, action) {
         return _this.dispatch(action);
       });
+      window.onpopstate = function(event) {
+        console.log(event);
+        console.log("back called");
+        return _this.goBack(event);
+      };
       return this.loadingController.activate();
     };
 
@@ -37,11 +42,34 @@ define(["zepto", "application/controllers/loading", "application/views/loadingSc
       console.log(e);
       switch (e) {
         case 'GAMESETUP':
-          return this.statemachine.trigger("change", this.gameSetupController);
+          this.statemachine.trigger("change", this.gameSetupController);
+          return history.pushState({
+            page: 'GAMESETUP'
+          }, "Game Setup", "#gamesetup");
         case 'GAMECREATE':
-          return this.statemachine.trigger("change", this.gameCreateController);
+          this.statemachine.trigger("change", this.gameCreateController);
+          return history.pushState({
+            page: 'GAMECREATE'
+          }, "Game Create", "#gamesetup");
         case 'GAMEJOIN':
-          return this.statemachine.trigger("change", this.gameJoinController);
+          this.statemachine.trigger("change", this.gameJoinController);
+          return history.pushState({
+            page: 'GAMEJOIN'
+          }, "Game Join", "#gamesetup");
+      }
+    };
+
+    Application.prototype.goBack = function(e) {
+      var _ref;
+      if ((e != null ? (_ref = e.state) != null ? _ref.page : void 0 : void 0) != null) {
+        switch (e.state.page) {
+          case 'GAMESETUP':
+            return this.statemachine.trigger("change", this.gameSetupController);
+          case 'GAMECREATE':
+            return this.statemachine.trigger("change", this.gameCreateController);
+          case 'GAMEJOIN':
+            return this.statemachine.trigger("change", this.gameJoinController);
+        }
       }
     };
 

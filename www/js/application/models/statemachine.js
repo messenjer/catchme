@@ -7,9 +7,7 @@ define(["zepto"], function($) {
     function StateMachine() {}
 
     StateMachine.prototype.add = function(controller) {
-      console.log("Adding controller ${controller}");
       this.bind("change", function(e, current) {
-        console.log("Binded ${controller}");
         if (controller === current) {
           return controller.activate();
         } else {
@@ -17,7 +15,6 @@ define(["zepto"], function($) {
         }
       });
       return controller.active = $.proxy(function() {
-        console.log("Change triggered ${controller}");
         this.trigger("change", controller);
       }, this);
     };

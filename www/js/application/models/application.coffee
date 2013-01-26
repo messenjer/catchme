@@ -33,7 +33,6 @@ define [
 
       @gameJoinController = new gameJoinController(new gameJoinView("#gameJoin"),@settings)
       @statemachine.add(@gameJoinController)
-      
 
       console.log("Application initialized...")
       
@@ -44,6 +43,11 @@ define [
       $('body').bind 'AppEvent', (e,action) =>
         @dispatch(action)
 
+      window.onpopstate = (event) =>
+        console.log event
+        console.log "back called"
+        @goBack(event)
+
       @loadingController.activate()
 
     dispatch: (e)->
@@ -52,8 +56,21 @@ define [
       switch e
         when 'GAMESETUP' 
           @statemachine.trigger("change",@gameSetupController)
+          history.pushState({page: 'GAMESETUP'}, "Game Setup", "#gamesetup")
         when 'GAMECREATE'
           @statemachine.trigger("change",@gameCreateController)
+          history.pushState({page: 'GAMECREATE'}, "Game Create", "#gamesetup")
         when 'GAMEJOIN'
           @statemachine.trigger("change",@gameJoinController)
+          history.pushState({page: 'GAMEJOIN'}, "Game Join", "#gamesetup")
         
+    goBack: (e) ->
+      if e?.state?.page?
+        switch e.state.page
+          when 'GAMESETUP'
+            @statemachine.trigger("change",@gameSetupController)
+          when 'GAMECREATE'
+            @statemachine.trigger("change",@gameCreateController)
+          when 'GAMEJOIN'
+            @statemachine.trigger("change",@gameJoinController)
+          

@@ -3,9 +3,7 @@ define ["zepto"],($) ->
     constructor: () ->
 
     add: (controller) ->
-      console.log "Adding controller ${controller}"
       @bind "change",(e,current)->
-        console.log "Binded ${controller}"
         if controller is current
           controller.activate()
         else
@@ -13,7 +11,6 @@ define ["zepto"],($) ->
       # add a proxied method
       controller.active = $.proxy(
           () ->
-            console.log "Change triggered ${controller}"
             @trigger "change", controller
             return
           ,@)

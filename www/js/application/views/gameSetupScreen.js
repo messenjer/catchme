@@ -18,20 +18,15 @@ define(["zepto", "underscore", "application/views/screen"], function($, _, Scree
     };
 
     gameSetupScreenView.prototype.bindActions = function(actions) {
-      var _this = this;
-      if (actions) {
-        if (actions.gamecreate) {
-          console.log("gamecreate bound");
-          $("" + this.divID + " .createGameButton").on('click', function() {
-            return actions.gamecreate;
-          });
-        }
-        if (actions.gamejoin) {
-          console.log("gamejoin bound");
-          return $("" + this.divID + " .joinGameButton").on('click', function() {
-            return actions.gamejoin;
-          });
-        }
+      if ((actions != null ? actions.gamecreate : void 0) != null) {
+        $("" + this.divID + " .createGameButton").on('click', function() {
+          return actions.gamecreate();
+        });
+      }
+      if ((actions != null ? actions.gamejoin : void 0) != null) {
+        return $("" + this.divID + " .joinGameButton").on('click', function() {
+          return actions.gamejoin();
+        });
       }
     };
 
