@@ -6,5 +6,8 @@
     removeCombined: true,
     modules: [
         { name: "../app" }
-    ]
+    ],
+    paths: {
+      application: "../application"
+    }
 })
