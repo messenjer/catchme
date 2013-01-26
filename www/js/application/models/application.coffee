@@ -23,9 +23,7 @@ define [
     @settings: null
 
     init: () ->
-      
       @api = new Api()
-      @api.init()
       @settings = new Settings()
       @statemachine = new StateMachine()
       @loadingController = new loadingController(new loadingView("#loading"),@settings)
@@ -50,7 +48,7 @@ define [
 
       @gameFinishController = new gameFinishController(new gameFinishView("#gameFinish"),@settings)
       @statemachine.add(@gameFinishController)      
-
+      
       console.log("Application initialized...")
       
       
@@ -66,6 +64,9 @@ define [
         @goBack(event)
 
       @loadingController.activate()
+      @api.setConnectionCallback(@loadingController.connectionOk)
+      @api.init()
+
 
     dispatch: (e)->
       console.log "dispatch received:"

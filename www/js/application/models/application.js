@@ -11,7 +11,6 @@ define(["zepto", "application/controllers/loading", "application/views/loadingSc
     Application.prototype.init = function() {
       var _this = this;
       this.api = new Api();
-      this.api.init();
       this.settings = new Settings();
       this.statemachine = new StateMachine();
       this.loadingController = new loadingController(new loadingView("#loading"), this.settings);
@@ -42,7 +41,9 @@ define(["zepto", "application/controllers/loading", "application/views/loadingSc
         console.log("back called");
         return _this.goBack(event);
       };
-      return this.loadingController.activate();
+      this.loadingController.activate();
+      this.api.setConnectionCallback(this.loadingController.connectionOk);
+      return this.api.init();
     };
 
     Application.prototype.dispatch = function(e) {
