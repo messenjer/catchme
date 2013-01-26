@@ -1,4 +1,4 @@
-require(["application/models/application","zepto"],function(Application, $) {
+require(["application/models/application","zepto","install"],function(Application, $, Install) {
 
   console.log("Bootstrap");
   $(function(){
