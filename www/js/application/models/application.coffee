@@ -84,4 +84,3 @@ define [
           when 'GAMEPLAYNG'
             @statemachine.trigger("change",@gamePlayingController)              
           
-
