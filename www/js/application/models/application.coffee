@@ -26,6 +26,7 @@ define [
     init: () ->
       
       @api = new Api()
+      @api.init()
       @settings = new Settings()
       @statemachine = new StateMachine()
       @loadingController = new loadingController(new loadingView("#loading"),@settings)

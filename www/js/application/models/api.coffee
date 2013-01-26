@@ -1,35 +1,13 @@
-define [],() ->
+define ["socket.io"],(io) ->
 
-  class RtbfApi
+  class CatchMeServerApi
     constructor:() ->
-      @url = "http://www.local.rtbf.be/api/test/demo2"
-      @data = []
+      @url = "http://localhost:8080/"
+      @gameData = {}
+      @socket = null;
 
-    setCallback: (@callback) ->
-
-    setErrorCallback: (@errorCallback) ->
-
-    fetchData: () ->
-      if @callback
-        async = true
-      else
-        async = false
-
-      $.ajax(@url,
-        async: async
-        success: (data,textStatus,jqXHR) =>
-          @data = data
-          @error = textStatus
-          @callback(data) if @callback
-        error: (jqXHR, textStatus,errorThrown) =>
-          @error = textStatus
-          @errorCallback(textStatus,errorThrown) if @errorCallback
-        complete: (jqXHR, textStatus) =>
-
-        )
-
-    getError: () ->
-      @error
-
-    getData: () ->
-      @data
+    init:() ->
+      @socket = io.connect(@url)
+      @socket.on 'news',(data)->
+        console.log data
+        @socket.emit('my other event', { my: 'data' })
