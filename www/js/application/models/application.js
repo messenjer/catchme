@@ -26,6 +26,7 @@ define(["zepto", "application/controllers/loading", "application/views/loadingSc
       this.gameWaitingController = new gameWaitingController(new gameWaitingView("#gameWaiting"), this.settings);
       this.statemachine.add(this.gameWaitingController);
       this.gamePlayingController = new gamePlayingController(new gamePlayingView("#gamePlaying"), this.settings);
+      this.gamePlayingController.load();
       this.statemachine.add(this.gamePlayingController);
       this.gameFinishController = new gameFinishController(new gameFinishView("#gameFinish"), this.settings);
       this.statemachine.add(this.gameFinishController);

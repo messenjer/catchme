@@ -45,6 +45,7 @@ define [
       @statemachine.add(@gameWaitingController)      
       
       @gamePlayingController = new gamePlayingController(new gamePlayingView("#gamePlaying"),@settings)
+      @gamePlayingController.load()
       @statemachine.add(@gamePlayingController)      
 
       @gameFinishController = new gameFinishController(new gameFinishView("#gameFinish"),@settings)
