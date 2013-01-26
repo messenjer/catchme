@@ -17,8 +17,8 @@ define(["zepto", "application/controllers/controller", "application/models/api"]
       this.connectionOK = __bind(this.connectionOK, this);
 
       loadingController.__super__.constructor.call(this, this.view);
-      this.connectionOK = false;
-      this.gpsOK = false;
+      this.connectionEstablished = false;
+      this.gpsAvailable = false;
     }
 
     loadingController.prototype.load = function() {};
@@ -27,25 +27,23 @@ define(["zepto", "application/controllers/controller", "application/models/api"]
 
     loadingController.prototype.activate = function() {
       loadingController.__super__.activate.call(this);
-      return setTimeout(this.event, 5000);
+      return setTimeout(this.fireLoadedEvent, 5000);
     };
 
-    loadingController.prototype.event = function() {
-      return $('body').trigger('AppEvent', ['GAMESETUP']);
-    };
-
-    loadingController.prototype.connectionOK = function(connectionOK) {
-      this.connectionOK = connectionOK != null ? connectionOK : true;
+    loadingController.prototype.connectionOK = function(connectionEstablished) {
+      this.connectionEstablished = connectionEstablished != null ? connectionEstablished : true;
+      this.view.connectionOK();
       console.log("connection established");
-      if (this.gpsOk) {
+      if (this.gpsAvailable) {
         return this.fireLoadedEvent();
       }
     };
 
-    loadingController.prototype.gpsOK = function(gpsOK) {
-      this.gpsOK = gpsOK != null ? gpsOK : true;
+    loadingController.prototype.gpsOK = function(gpsAvailable) {
+      this.gpsAvailable = gpsAvailable != null ? gpsAvailable : true;
+      this.view.gpsOK();
       console.log("gps OK");
-      if (this.connectionOK) {
+      if (this.connectionEstablished) {
         return this.fireLoadedEvent();
       }
     };

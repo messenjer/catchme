@@ -4,8 +4,8 @@ define ["zepto","application/controllers/controller","application/models/api"], 
 
     constructor:(@view,@settings)->
       super @view
-      @connectionOK = false
-      @gpsOK = false
+      @connectionEstablished = false
+      @gpsAvailable = false
 
     load:() ->
       
@@ -14,19 +14,18 @@ define ["zepto","application/controllers/controller","application/models/api"], 
 
     activate:() ->
       super()
-      setTimeout(@event,5000)
+      setTimeout(@fireLoadedEvent,5000)
 
-    event:() ->
-      $('body').trigger('AppEvent',['GAMESETUP'])
-
-    connectionOK:(@connectionOK=true) =>
+    connectionOK:(@connectionEstablished=true) =>
+      @view.connectionOK()
       console.log "connection established"
-      if(@gpsOk)
+      if(@gpsAvailable)
         @fireLoadedEvent()
 
-    gpsOK:(@gpsOK=true) =>
+    gpsOK:(@gpsAvailable=true) =>
+      @view.gpsOK()
       console.log "gps OK"
-      if(@connectionOK)
+      if(@connectionEstablished)
         @fireLoadedEvent()
 
     fireLoadedEvent:() ->

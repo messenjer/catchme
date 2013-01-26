@@ -11,27 +11,52 @@ define(["socket.io"], function(io) {
       this.onConnect = __bind(this.onConnect, this);
 
       this.onError = __bind(this.onError, this);
-      this.url = "http://localhost:8080/";
+      this.url = "http://10.102.180.34:8080/";
       this.gameData = {};
       this.socket = null;
       this.connectCallback = null;
+      this.id = null;
+      this.callbackGameOn = null;
     }
 
     CatchMeServerApi.prototype.setConnectionCallback = function(connectCallback) {
       this.connectCallback = connectCallback;
     };
 
+    CatchMeServerApi.prototype.setGeoloc = function(geoloc) {
+      this.geoloc = geoloc;
+    };
+
+    CatchMeServerApi.prototype.setCallbackGameOn = function(callbackGameOn) {
+      this.callbackGameOn = callbackGameOn;
+      return console.log("game on callback");
+    };
+
     CatchMeServerApi.prototype.init = function() {
       this.socket = io.connect(this.url);
+      this.socket.on('id', this.onId);
       this.socket.on('error', this.onError);
       this.socket.on('connect', this.onConnect);
       this.socket.on('debug', this.onDebug);
+      this.socket.on('gameon', this.onGameon);
       return this.socket.on('news', function(data) {
         console.log(data);
         return this.socket.emit('my other event', {
           my: 'data'
         });
       });
+    };
+
+    CatchMeServerApi.prototype.sendPosition = function(position) {
+      return this.socket.emit('position', position);
+    };
+
+    CatchMeServerApi.prototype.whoAmi = function() {
+      return this.socket.emit('whoami');
+    };
+
+    CatchMeServerApi.prototype.onId = function(id) {
+      this.id = id;
     };
 
     CatchMeServerApi.prototype.onError = function(error) {
@@ -48,6 +73,24 @@ define(["socket.io"], function(io) {
     CatchMeServerApi.prototype.onDebug = function(message) {
       console.log("debug message received:");
       return console.log(message);
+    };
+
+    CatchMeServerApi.prototype.onGameon = function(gameData) {
+      this.gameData = gameData;
+      console.log("gameon received");
+      console.log(this.gameData);
+      return typeof this.callbackGameOn === "function" ? this.callbackGameOn() : void 0;
+    };
+
+    CatchMeServerApi.prototype.getOthersPosition = function() {
+      var key, value, _ref;
+      _ref = this.gameData;
+      for (key in _ref) {
+        value = _ref[key];
+        if (key === !this.id) {
+          return value.position;
+        }
+      }
     };
 
     return CatchMeServerApi;

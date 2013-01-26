@@ -8,9 +8,16 @@ define ["zepto","application/controllers/controller"], ($,Controller) ->
         gamestart: @startGame
       @view.bindActions availaibleActions
       
-
     activate:() ->
       super()
+      if @geoloc?.getPosition?
+        @api?.setCallbackGameOn(@startGame)
+        @api?.whoAmi()
+        @api?.sendPosition(@geoloc.getPosition())
+
+    setGeoloc:(@geoloc) ->
+
+    setApi:(@api) ->
 
     unload:() ->
 

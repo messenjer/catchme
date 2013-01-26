@@ -18,7 +18,8 @@ define [
   "application/models/api",
   "application/models/settings",
   "application/models/geoloc",
-  "application/models/statemachine"], ($,loadingController,loadingView,gameSetupController,gameSetupView,gameCreateController,gameCreateView,gameJoinController,gameJoinView,gameWaitingController,gameWaitingView,gamePlayingController,gamePlayingView,gameFinishController,gameFinishView,Input,Api,Settings,Geolocation,StateMachine) ->
+  "application/models/map",
+  "application/models/statemachine"], ($,loadingController,loadingView,gameSetupController,gameSetupView,gameCreateController,gameCreateView,gameJoinController,gameJoinView,gameWaitingController,gameWaitingView,gamePlayingController,gamePlayingView,gameFinishController,gameFinishView,Input,Api,Settings,Geolocation,Map,StateMachine) ->
 
   class Application
     @settings: null
@@ -45,6 +46,7 @@ define [
       
       @gamePlayingController = new gamePlayingController(new gamePlayingView("#gamePlaying"),@settings)
       @gamePlayingController.load()
+
       @statemachine.add(@gamePlayingController)      
 
       @gameFinishController = new gameFinishController(new gameFinishView("#gameFinish"),@settings)
@@ -67,8 +69,15 @@ define [
 
       @geoloc = new Geolocation()
       @geoloc.updatePositionStart()
-
+      @geoloc.setAvailableCallback(@loadingController.gpsOK)
+      @map = new Map()
+      @gamePlayingController.setMap(@map)
+      @gamePlayingController.setGeoloc(@geoloc)
+      @gamePlayingController.setApi(@api)
+      @gameWaitingController.setApi(@api)
+      @gameWaitingController.setGeoloc(@geoloc)
       @api.setConnectionCallback(@loadingController.connectionOk)
+      @api.setGeoloc(@geoloc)
       @api.init()
 
 
@@ -76,9 +85,12 @@ define [
       console.log "dispatch received:"
       console.log e
       switch e
-        when 'GAMESETUP' 
+        when 'GAMESETUP'
           @statemachine.trigger("change",@gameSetupController)
           history.pushState({page: 'GAMESETUP'}, "Game Setup", "#gamesetup")
+          @geoloc.setAvailableCallback(null)
+          @map.setCentralPosition(@geoloc.getPosition())
+          @geoloc.getPosition()
         when 'GAMECREATE'
           @statemachine.trigger("change",@gameCreateController)
           history.pushState({page: 'GAMECREATE'}, "Game Create", "#gamecreate")

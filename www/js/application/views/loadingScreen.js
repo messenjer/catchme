@@ -38,6 +38,14 @@ define(["zepto", "application/views/screen"], function($, ScreenView) {
       return $("" + this.divID + " .loading .dots").html("" + this.dots);
     };
 
+    loadingScreenView.prototype.gpsOK = function() {
+      return $("" + this.divID + " .gpsAvailable").show();
+    };
+
+    loadingScreenView.prototype.connectionOK = function() {
+      return $("" + this.divID + " .connectionEstablished").show();
+    };
+
     return loadingScreenView;
 
   })(ScreenView);

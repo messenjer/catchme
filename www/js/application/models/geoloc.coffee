@@ -5,6 +5,9 @@ define ["zepto"],($) ->
     constructor:() ->
         @position = null
         @setinterval = false
+        @callback = null
+
+    setAvailableCallback: (@callback) ->
 
     getPosition:() ->
         @position
@@ -30,11 +33,13 @@ define ["zepto"],($) ->
             when error.UNKNOWN_ERROR
                 alert("Unknown error happened, oops")
 
-    updatePosition:(pos) ->
+    updatePosition:(pos) -> 
         @position = [ pos.coords.latitude, pos.coords.longitude ]
         console.log @position
         if @setinterval 
             @infiniteLoop = setInterval(@getCurrentPosition,60000)
+
+        @callback?()
 
     updatePositionStart:() ->
         @setinterval = true

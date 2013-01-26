@@ -2,6 +2,11 @@
   display: block;
 }
 
+#loading .info {
+  display: none;
+  color: #0F0;
+}
+
 #loading .circle {
   background-color: rgba(0,0,0,0);
   border:5px solid rgba(0,183,229,0.9);

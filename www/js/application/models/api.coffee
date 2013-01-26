@@ -2,21 +2,38 @@ define ["socket.io"],(io) ->
 
   class CatchMeServerApi
     constructor:() ->
-      @url = "http://localhost:8080/"
+      @url = "http://10.102.180.34:8080/"
       @gameData = {}
-      @socket = null;
+      @socket = null
       @connectCallback = null;
+      @id = null
+      @callbackGameOn = null
 
     setConnectionCallback:(@connectCallback) ->
 
+    setGeoloc:(@geoloc) ->
+
+    setCallbackGameOn:(@callbackGameOn) ->
+      console.log "game on callback"
+
     init:() ->
       @socket = io.connect(@url)
+      @socket.on 'id', @onId
       @socket.on 'error', @onError
       @socket.on 'connect', @onConnect
       @socket.on 'debug', @onDebug
+      @socket.on 'gameon', @onGameon
       @socket.on 'news',(data)->
         console.log data
         @socket.emit('my other event', { my: 'data' })
+
+    sendPosition:(position)->
+      @socket.emit('position',position)
+
+    whoAmi:() ->
+      @socket.emit('whoami')
+
+    onId:(@id) ->
 
     onError:(error) =>
       console.log error
@@ -30,3 +47,13 @@ define ["socket.io"],(io) ->
     onDebug:(message) =>
       console.log "debug message received:"
       console.log message
+
+    onGameon:(@gameData) ->
+      console.log "gameon received"
+      console.log @gameData
+      @callbackGameOn?()
+
+    getOthersPosition:() ->
+      for key,value of @gameData
+        if key is not @id
+          return value.position

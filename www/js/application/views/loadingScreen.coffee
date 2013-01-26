@@ -22,3 +22,9 @@ define ["zepto","application/views/screen"], ($,ScreenView) ->
       else
         @dots = '.'
       $("#{@divID} .loading .dots").html("#{@dots}")
+
+    gpsOK: () ->
+      $("#{@divID} .gpsAvailable").show()
+
+    connectionOK: () ->
+      $("#{@divID} .connectionEstablished").show()

@@ -23,7 +23,25 @@ define(["zepto", "application/controllers/controller"], function($, Controller) 
     }
 
     gameWaitingController.prototype.activate = function() {
-      return gameWaitingController.__super__.activate.call(this);
+      var _ref, _ref1, _ref2, _ref3;
+      gameWaitingController.__super__.activate.call(this);
+      if (((_ref = this.geoloc) != null ? _ref.getPosition : void 0) != null) {
+        if ((_ref1 = this.api) != null) {
+          _ref1.setCallbackGameOn(this.startGame);
+        }
+        if ((_ref2 = this.api) != null) {
+          _ref2.whoAmi();
+        }
+        return (_ref3 = this.api) != null ? _ref3.sendPosition(this.geoloc.getPosition()) : void 0;
+      }
+    };
+
+    gameWaitingController.prototype.setGeoloc = function(geoloc) {
+      this.geoloc = geoloc;
+    };
+
+    gameWaitingController.prototype.setApi = function(api) {
+      this.api = api;
     };
 
     gameWaitingController.prototype.unload = function() {};
