@@ -9,5 +9,6 @@
     ],
     paths: {
       application: "../application"
-    }
+    },
+    fileExclusionRegExp: /^\.|.*\.coffee$/
 })
