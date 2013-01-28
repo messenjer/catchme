@@ -1,1 +1,65 @@
-Setting up pages...
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Place favicon.ico in the root directory -->
+
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <!-- Uncomment this button to install locally without going
+         through the marketpace (see app.js) -->
+    <button id="install-btn">Install</button>
+    <div id="loading" class="screen">
+      <div class="circle"></div>
+      <div class="circle1"></div>
+      <div class="loading">Loading <span class="dots"></span></div>
+      <div class="version">Version 0.1</div>
+      <div class="info connectionEstablished">Connection established</div>
+      <div class="info gpsAvailable">GPS position available</div>
+    </div>
+    <div id="gameSetup" class="screen">
+      <button class="createGameButton">Create Game</button>
+      <button class="joinGameButton">Join Game</button>
+    </div>
+    <div id="gameCreate" class="screen">
+        <label for="name">Name</label>
+        <input type="text" name="name" />
+        <label for="type">Game type</label>
+        <select name="gametype">
+          <option value="type01">Catch small (1 min)</option>
+          <option value="type15">Catch small (15 min)</option>
+          <option value="type30">Catch small (30 min)</option>
+        </select>
+        <button class="startGameButton">Start</button>
+    </div>
+    <div id="gameJoin" class="screen">
+        <label for="name">Name</label>
+        <input type="text" name="name" />
+        <button class="startGameButton">Start</button>
+    </div>
+    <div id="gameWaiting" class="screen">
+      <p>Waiting ...</p>
+      <button class="go">Go !!!</button>
+    </div>
+    <div id="gamePlaying" class="screen">
+      <div id="map"></div>
+    </div>
+    <div id="gameFinish" class="screen">
+    </div>
+
+    <!-- Using require.js, a module system for javascript, include the
+         js files. This loads "main.js", which in turn can load other
+         files, all handled by require.js:
+         http://requirejs.org/docs/api.html#jsfiles -->
+    <script type="text/javascript"
+            data-main="js/init.js"
+            src="js/lib/require.js"></script>
+    <script src="js/lib/leaflet/leaflet.js"></script>
+  </body>
+</html>

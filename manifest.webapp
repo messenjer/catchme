@@ -1,0 +1,19 @@
+{
+  "version": "0.2",
+  "name": "Catch Me!",
+  "description": "Catch me if you can",
+  "launch_path": "/",
+  "icons": {
+    "16": "/img/icons/catchme-16.png",
+    "48": "/img/icons/cathcme-48.png",
+    "128": "/img/icons/cathcme-128.png"
+  },
+  "developer": {
+    "name": "RTBF Hackaton Team: @matheyes and @scips",
+    "url": "http://www.rtbf.be"
+  },
+  "installs_allowed_from": ["*"],
+  "appcache_path": "/cache.manifest"
+  },
+  "default_locale": "en"
+}
