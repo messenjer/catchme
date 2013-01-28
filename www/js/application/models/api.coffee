@@ -2,7 +2,7 @@ define ["socket.io"],(io) ->
 
   class CatchMeServerApi
     constructor:() ->
-      @url = "http://10.102.180.34:8080/"
+      @url = "http://tranquil-earth-2452.herokuapp.com/"
       @gameData = {}
       @socket = null
       @connectCallback = null;

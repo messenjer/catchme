@@ -15,7 +15,7 @@ define(["socket.io"], function(io) {
       this.onError = __bind(this.onError, this);
 
       this.onId = __bind(this.onId, this);
-      this.url = "http://10.102.180.34:8080/";
+      this.url = "http://tranquil-earth-2452.herokuapp.com/";
       this.gameData = {};
       this.socket = null;
       this.connectCallback = null;
