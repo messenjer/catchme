@@ -7,21 +7,25 @@ css/loading.css
 css/leaflet.css
 css/app.css
 
-css/loading.css
+css/global.css
 ----------------
-css/loading.css
-
-css/leaflet.css
-----------------
-css/leaflet.css
+css/global.css
 
 css/install-button.css
 ----------------
 css/install-button.css
 
-css/global.css
+css/leaflet.css
 ----------------
-css/global.css
+css/leaflet.css
+
+css/loading.css
+----------------
+css/loading.css
+
+js/lib/layouts/css/layouts.css
+----------------
+js/lib/layouts/css/layouts.css
 
 js/lib/leaflet/leaflet.css
 ----------------
@@ -30,10 +34,6 @@ js/lib/leaflet/leaflet.css
 js/lib/leaflet/leaflet.ie.css
 ----------------
 js/lib/leaflet/leaflet.ie.css
-
-js/lib/layouts/css/layouts.css
-----------------
-js/lib/layouts/css/layouts.css
 
 js/lib/../app.js
 ----------------
